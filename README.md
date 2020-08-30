@@ -3,7 +3,7 @@ Hands-on reinforcement learning mini project finding the shortest path in a grid
 
 ### How to run?
 Through kernel with nodejs runtime installed.
-1) Clone this repository into your local machine.
+1) Clone the branch from this repository called 'kernel_version' into your local machine.
 2) Open logic.js and adjust the parameters in the train() function (width and height of the grid, greed parameter, number of episodes, learning rate,...).
 3) Save the file.
 4) Open kernel with nodejs runtime installed.
