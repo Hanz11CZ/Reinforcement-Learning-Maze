@@ -1,0 +1,33 @@
+#grid_container {
+    width: 1000px;
+    height: 750px;
+    display: grid;
+    background-color: #b4a4a4;
+    border: solid #121272 2px;
+    position: absolute;
+    top: 30px;
+    left: 200px;
+}
+.block {
+    max-width:100%;
+    max-height:100%;
+    border: solid #121272 1px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 10px;
+    font-family: "Archivo";
+}
+.block:hover {
+    font-size: 20px;
+    z-index: 5;
+}
+.goal {
+    background-color: #065811;
+    font-size: 25px;
+}
+.visited {
+    background-color: #ccc;
+    text-align: center;
+}

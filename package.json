@@ -1,0 +1,18 @@
+{
+  "name": "reinforcementmaze",
+  "version": "1.0.0",
+  "description": "",
+  "main": "node.js",
+  "scripts": {
+    "test": "console.log(\"hey\")"
+  },
+  "keywords": [
+    "Reinforcement",
+    "Maze"
+  ],
+  "author": "Jan Sobotka",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
