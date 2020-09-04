@@ -28,40 +28,36 @@ function drawBox(state,next_state) {
 //          Inserting goal (goal_x_position,goal_y_position) - zero-based order
 
 function createInitialBoard(width,height,goal_x_position,goal_y_position,goal_reward=1,boxes_reward=0) {
-    var grid_container = document.getElementById("grid_container");
-    grid_container.style.gridTemplateColumns = "repeat(" + width + ", calc(" + grid_container.offsetWidth + "px/" + width + "))";
-    grid_container.style.gridTemplateRows = "repeat(" + height + ", calc(" + grid_container.offsetHeight + "px/" + height + "))";
-    var board = newBoard(width, height,boxes_reward);
-    insertGoal(board,[goal_x_position,goal_y_position],goal_reward);
-    console.log(board);
-    // For each block in the board, create a grid box in html
-    for (let i = 0;i < board.length;i++) {
-        for (let j = 0;j < board[i].length;j++) {
-            var block = document.createElement("div");
-            block.classList.add("block");
-            block.id = i+""+j;
-            if (board[i][j] == goal_reward) {
-                block.classList.add("goal");
+    try {
+        var grid_container = document.getElementById("grid_container");
+        grid_container.style.gridTemplateColumns = "repeat(" + width + ", calc(" + grid_container.offsetWidth + "px/" + width + "))";
+        grid_container.style.gridTemplateRows = "repeat(" + height + ", calc(" + grid_container.offsetHeight + "px/" + height + "))";
+        var board = newBoard(width, height,boxes_reward);
+        insertGoal(board,[goal_x_position,goal_y_position],goal_reward);
+        console.log(board);
+        // For each block in the board, create a grid box in html
+        for (let i = 0;i < board.length;i++) {
+            for (let j = 0;j < board[i].length;j++) {
+                var block = document.createElement("div");
+                block.classList.add("block");
+                block.id = i+""+j;
+                if (board[i][j] == goal_reward) {
+                    block.classList.add("goal");
+                }
+                grid_container.appendChild(block);
             }
-            grid_container.appendChild(block);
+        };
+        // Table of Q-values
+        // each state has an array of Q-values for each action in this order: [up,right,down,left]
+        var Qvalues = {};
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                Qvalues[i+""+j] = [0,0,0,0];     
+            }
         }
-    };
-    // Table of Q-values
-    // each state has an array of Q-values for each action in this order: [up,right,down,left]
-    var Qvalues = {};
-    for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < board[i].length; j++) {
-            Qvalues[i+""+j] = [0,0,0,0];     
-        }
+        console.log(Qvalues);
+        return [board,Qvalues];
+    } catch(err) {
+        logError("error has occured: "+err);
     }
-    console.log(Qvalues);
-    return [board,Qvalues];
 }
-
-function finishAndUpdateGUI(num_of_steps) {
-    
-}
-/*
-let boardAndQvalues = createInitialBoard(15,8,5,6,1,0);
-const board = boardAndQvalues[0];
-const Qvalues = boardAndQvalues[1];*/

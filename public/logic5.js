@@ -132,11 +132,15 @@ function go(startingState,learning_rate,discount_rate,greed_parameter,goal_rewar
 }
 
 function train(num_of_episodes,learning_rate = 0.8,discount_rate = 0.8,greed_parameter=0.6,goal_reward_amount=1) {
-    for (let episode = 0; episode < num_of_episodes; episode++) {
-        go(starting_state,learning_rate,discount_rate,greed_parameter,goal_reward_amount);
+    try {
+        for (let episode = 0; episode < num_of_episodes; episode++) {
+            go(starting_state,learning_rate,discount_rate,greed_parameter,goal_reward_amount);
+        }
+        let num_of_steps = 0;
+        return [showBestPath(starting_state,num_of_steps),Qvalues];
+    } catch(err) {
+        logError("error has occured: "+err);
     }
-    let num_of_steps = 0;
-    return [showBestPath(starting_state,num_of_steps),Qvalues];
 }
 
 function showBestPath(state,num_of_steps) {
@@ -168,7 +172,6 @@ function showBestPath(state,num_of_steps) {
     // Base case when we reach the goal block:
     if(next_box_to_paint.classList.contains("goal")) {
         next_box_to_paint.innerHTML = "WIN";
-        finishAndUpdateGUI(num_of_steps)
         return num_of_steps;
     }
     return showBestPath(next_state,num_of_steps);

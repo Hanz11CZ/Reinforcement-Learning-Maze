@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="static/basic.css">
     </head>
     <body>
+
         <div id="grid_container">
         </div>
 
@@ -47,12 +48,12 @@
                     <br>
                     <div class="input_container">
                         <label for="learningRate">Learning rate:</label>
-                        <input type="number" name="learningRate" min="0" max="1" value="0.8">
+                        <input type="number" name="learningRate" min="0" max="1" value="0.6">
                     </div>
                     <br>
                     <div class="input_container">
                         <label for="discountRate">Discount rate:</label>
-                        <input type="number" name="discountRate" min="0" max="1" value="0.8">
+                        <input type="number" name="discountRate" min="0" max="1" value="0.7">
                     </div>
                     <br>
                     <div class="input_container">
@@ -82,23 +83,43 @@
                 for (let index = 0; index < inputs.length; index++) {
                     parameters[inputs[index].name] = inputs[index].value;
                 }
-                let boardAndQvalues = createInitialBoard(parameters["boardWidth"],parameters["boardHeight"],parameters["goalX"],parameters["goalY"],parameters["goalReward"],0);
-                board = boardAndQvalues[0];
-                Qvalues = boardAndQvalues[1];
-                let resultsAfterFindingBestPath = train(parameters["numOfEpisodes"],parameters["learningRate"],parameters["discountRate"],parameters["greedParameter"],parameters["goalReward"]);
-                let lengthOfShortestPath = resultsAfterFindingBestPath[0];
-                let finalQValues = resultsAfterFindingBestPath[1];
-                insertResults(lengthOfShortestPath);
+                if(areParametersOk(parameters)) {
+                    let boardAndQvalues = createInitialBoard(parameters["boardWidth"],parameters["boardHeight"],parameters["goalX"],parameters["goalY"],parameters["goalReward"],0);
+                    board = boardAndQvalues[0];
+                    Qvalues = boardAndQvalues[1];
+                    let resultsAfterFindingBestPath = train(parameters["numOfEpisodes"],parameters["learningRate"],parameters["discountRate"],parameters["greedParameter"],parameters["goalReward"]);
+                    let lengthOfShortestPath = resultsAfterFindingBestPath[0];
+                    let finalQValues = resultsAfterFindingBestPath[1];
+                    insertResults(lengthOfShortestPath);
+                };
             }
+
             function clearBoard() {
                 let blocksVisitedLastTime = document.getElementById("grid_container");
                 if(blocksVisitedLastTime) {
                     blocksVisitedLastTime.innerHTML = "";
                 }
             }
+
             function insertResults(shortestPath) {
                 let shortestPathBox = document.getElementById("shortestPathInput");
                 shortestPathBox.value = shortestPath;
+            }
+
+            function areParametersOk(parameters) {
+                console.log(parameters);
+                if((parseInt(parameters["goalX"]) >= parseInt(parameters["boardWidth"])) || (parseInt(parameters["goalY"]) >= parseInt(parameters["boardHeight"]))) {
+                    logError("You tried to insert the goal outside of the board. Keep in mind, that the Goal's X and Y values are 0-based (0,1,2,3,..)!");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function logError(err_message) {
+                let container_to_insert_err_in = document.getElementById("grid_container");
+                console.log("logging error!");
+                container_to_insert_err_in.innerHTML += "<div class='error_log_container'><h2>"+err_message+"</h2></div>";
             }
         </script>
     </body>
