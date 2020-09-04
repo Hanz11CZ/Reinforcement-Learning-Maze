@@ -5,9 +5,101 @@
     </head>
     <body>
         <div id="grid_container">
-
         </div>
-        <script src="static/board.js"></script>
+
+        <div class="dashboard">
+            <div class="parameters_container">
+                <div class="board_parameters_container">
+                    <h2>BOARD SETUP</h2>
+                    <div class="input_container">
+                        <label for="boardWidth">Width of the Board:</label>
+                        <input type="number" name="boardWidth" min="3" max="30" value="12">
+                    </div>
+                    <br>
+                    <div class="input_container">
+                        <label for="boardHeight">Height of the Board:</label>
+                        <input type="number" name="boardHeight" min="3" max="30" value="15">
+                    </div>
+                    <br>
+                    <div class="input_container">
+                        <label for="goalX">Goal X position = horizontal (zero-based: 0,1,2,3,..):</label>
+                        <input type="number" name="goalX" min="0" max="30" value="8">
+                    </div>
+                    <br>
+                    <div class="input_container">
+                        <label for="goalY">Goal Y position = vertical (zero-based: 0,1,2,3,..):</label>
+                        <input type="number" name="goalY" min="0" max="30" value="12">
+                    </div>
+                    <br>
+                    <div class="input_container">
+                        <label for="goalReward">Reward for the goal box:</label>
+                        <input type="number" name="goalReward" value="10">
+                    </div>
+                    <br>
+                </div>
+
+                <div class="training_parameters_container">
+                    <h2>TRAINING</h2>
+                    <div class="input_container">
+                        <label for="numOfEpisodes">Number of episodes:</label>
+                        <input type="number" name="numOfEpisodes" value="500">
+                    </div>
+                    <br>
+                    <div class="input_container">
+                        <label for="learningRate">Learning rate:</label>
+                        <input type="number" name="learningRate" min="0" max="1" value="0.8">
+                    </div>
+                    <br>
+                    <div class="input_container">
+                        <label for="discountRate">Discount rate:</label>
+                        <input type="number" name="discountRate" min="0" max="1" value="0.8">
+                    </div>
+                    <br>
+                    <div class="input_container">
+                        <label for="greedParameter">Greed parameter:</label>
+                        <input type="number" name="greedParameter" min="0" max="1" value="0.8">
+                    </div>
+                </div>
+            </div>
+            <button onclick="createBoardAndTrain()">LET'S GO</button>
+            <div class="final_results">
+                <label for="shortestPath">Length of the shortest path found:</label>
+                <input type="value" name="shortestPath" id="shortestPathInput">
+            </div>
+        </div>
+
+        <script src="static/board_gui.js"></script>
         <script defer src="static/logic5.js"></script>
+        <script>
+            let Qvalues = {};
+            let board = [];
+            function createBoardAndTrain() {
+                clearBoard();
+                Qvalues = {};
+                board = [];
+                let parameters = {};
+                let inputs = document.getElementsByTagName("input");
+                for (let index = 0; index < inputs.length; index++) {
+                    parameters[inputs[index].name] = inputs[index].value;
+                }
+                let boardAndQvalues = createInitialBoard(parameters["boardWidth"],parameters["boardHeight"],parameters["goalX"],parameters["goalY"],parameters["goalReward"],0);
+                board = boardAndQvalues[0];
+                Qvalues = boardAndQvalues[1];
+                let resultsAfterFindingBestPath = train(parameters["numOfEpisodes"],parameters["learningRate"],parameters["discountRate"],parameters["greedParameter"],parameters["goalReward"]);
+                let lengthOfShortestPath = resultsAfterFindingBestPath[0];
+                let finalQValues = resultsAfterFindingBestPath[1];
+                insertResults(lengthOfShortestPath);
+            }
+            function clearBoard() {
+                let blocksVisitedLastTime = document.getElementById("grid_container");
+                if(blocksVisitedLastTime) {
+                    blocksVisitedLastTime.innerHTML = "";
+                }
+            }
+            function insertResults(shortestPath) {
+                let shortestPathBox = document.getElementById("shortestPathInput");
+                shortestPathBox.value = shortestPath;
+            }
+        </script>
     </body>
 </html>

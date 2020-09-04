@@ -1,6 +1,6 @@
 const starting_state = [1,1];
 const actions = ["UP","RIGHT","DOWN","LEFT"];
-const createInitialBoardForKernel = require("./board.js")
+const createInitialBoardForKernel = require("./board_kernel.js")
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));

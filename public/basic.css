@@ -1,26 +1,32 @@
+body {
+    overflow-x: hidden;
+    font-family: "League Spartan";
+    padding-bottom: 20px;
+    margin: 0;
+    padding: 0;
+}
 #grid_container {
-    width: 1000px;
-    height: 750px;
+    width: 100vw;
+    height: 75vh;
     display: grid;
-    background-color: #b4a4a4;
-    border: solid #121272 2px;
-    position: absolute;
-    top: 30px;
-    left: 200px;
+    background-color: #f7f1e3;
 }
 .block {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     max-width:100%;
     max-height:100%;
-    border: solid #121272 1px;
+    border: dashed #cc8d355d 0.5px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-    font-size: 10px;
+    font-size: 8px;
     font-family: "Archivo";
 }
 .block:hover {
-    font-size: 20px;
+    font-size: 16px;
     z-index: 5;
 }
 .goal {
@@ -28,6 +34,64 @@
     font-size: 25px;
 }
 .visited {
-    background-color: #ccc;
+    background-color: #fff;
+    text-align: center;
+}
+
+/*
+ DASHBOARD ----->   
+*/
+
+.dashboard {
+    min-height: 25vh;
+    width: 100vw;
+    background-color: #d1ccc0;
+    text-align: center;
+    padding: 15px 0;
+}
+.parameters_container {
+    max-height: 90%;
+    width: 75%;
+    margin: auto;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;  
+}
+.parameters_container h2 {
+    color: #fff;
+}
+.board_parameters_container, .training_parameters_container {
+    max-width: 50%;
+    text-align: left;
+    padding-right: 12px;
+}
+.dashboard button {
+    background-color: #cc8e35;
+    color: #fff;
+    border: 0px;
+    padding: 20px 60px; 
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.dashboard button:hover {
+    opacity: 0.7;
+}
+.input_container {
+    margin: 5px 10px;
+}
+input {
+    padding: 12px 8px 10px 8px;
+    border: 0px; 
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.final_results {
+    margin-top: 15px;
+}
+.final_results input {
     text-align: center;
 }
