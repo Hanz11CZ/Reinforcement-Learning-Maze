@@ -2,10 +2,12 @@
 Hands-on reinforcement learning mini project finding the shortest path in a grid from initial position to the goal one.
 
 ### How to run?
-Through kernel with nodejs runtime installed.
-1) Clone the branch from this repository called 'kernel_version' into your local machine.
-2) Open logic.js and adjust the parameters in the train() function (width and height of the grid, greed parameter, number of episodes, learning rate,...).
-3) Save the file.
-4) Open kernel with nodejs runtime installed.
-5) Change directory to Reinforcement-Learning-Maze and type 'node .\logic.js'
-6) You should see the length of the shortest path.
+Prerequisite: NodeJS runtime installed on your machine/virtual environment (version while developing: v12.16.2)
+1) Download this whole repository in zip into your local machine and extract.
+2) In the root of the Reinforcement-Learning-Maze folder, run in your terminal "node .\server.js"
+3) Localhost server should start on port :8080
+4) Navigate to this address in your web browser
+5) Modify the board size, position of the goal block and the training parameters. (Defaults are set to what I've found suitable and well performing)
+6) Press "LET'S GO" button
+7) You should see the length of the shortest path found by the reinforcement-learning algorithm
+8) Modify the parameters and play till you get bored :)
