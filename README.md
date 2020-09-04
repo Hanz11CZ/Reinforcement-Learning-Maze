@@ -4,7 +4,7 @@ Hands-on reinforcement learning mini project finding the shortest path in a grid
 ### How to run?
 Prerequisite: NodeJS runtime installed on your machine/virtual environment (version while developing: v12.16.2)
 1) Download this whole repository in zip into your local machine and extract.
-2) In the root of the Reinforcement-Learning-Maze folder, run in your terminal "node .\server.js"
+2) In the root of the Reinforcement-Learning-Maze folder, run in your terminal "node server.js"
 3) Localhost server should start on port :8080
 4) Navigate to this address in your web browser
 5) Modify the board size, position of the goal block and the training parameters. (Defaults are set to what I've found suitable and well performing)
