@@ -1,5 +1,5 @@
 # Reinforcement-Learning-Maze
-Hands-on reinforcement learning mini project finding the shortest path in a grid from initial position to the goal one.
+Hands-on primitive reinforcement learning mini project finding the shortest path in a grid from initial position to the goal one.
 
 ### How to run?
 Prerequisite: NodeJS runtime installed on your machine/virtual environment (version while developing: v12.16.2)
